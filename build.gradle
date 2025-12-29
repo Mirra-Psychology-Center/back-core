@@ -1,0 +1,86 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.5'
+	id 'io.spring.dependency-management' version '1.1.6'
+	id 'org.flywaydb.flyway' version '10.17.0'
+	id 'nu.studer.jooq' version '9.0'
+}
+
+group = 'com.yourcompany'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	/* ================= CORE ================= */
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	/* ================= SECURITY ================= */
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+
+	/* ================= REALTIME ================= */
+
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+	/* ================= DATABASE ================= */
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.postgresql:postgresql'
+
+	/* ================= jOOQ ================= */
+
+	implementation 'org.springframework.boot:spring-boot-starter-jooq'
+
+	/* ================= MIGRATIONS ================= */
+
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.flywaydb:flyway-database-postgresql'
+
+	/* ================= JSON ================= */
+
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+	/* ================= API DOCS ================= */
+
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+
+	/* ================= PUSH NOTIFICATIONS ================= */
+
+	implementation 'com.google.firebase:firebase-admin:9.3.0'
+
+	/* ================= OBSERVABILITY ================= */
+
+	implementation 'io.micrometer:micrometer-tracing-bridge-otel'
+	implementation 'io.opentelemetry:opentelemetry-exporter-otlp'
+
+	/* ================= UTILS ================= */
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	/* ================= TESTING ================= */
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:postgresql'
+}
+
+tasks.withType(Test) {
+	useJUnitPlatform()
+}
